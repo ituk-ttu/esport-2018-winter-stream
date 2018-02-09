@@ -214,10 +214,7 @@ function updateGroups () {
             if (err) {
                 return console.log(err);
             }
-            let normalize2 = normalize(compute(body))
-            console.log(JSON.stringify(normalize2));
-
-            return normalize2;
+            return normalize(compute(body));
         });
 
     function compute (matches) {
