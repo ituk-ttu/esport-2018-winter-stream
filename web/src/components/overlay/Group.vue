@@ -38,17 +38,19 @@
       .title, .team {
         transform: translateY(100px);
         opacity: 0;
-        transition-delay: 500ms;
       }
-      @iterations: 5;
-      .teams-loop (@i) when (@i > 0) {
-        .team:nth-of-type(@{i}) {
-          transition-delay: (500ms - @i * 100ms);
-        }
-        .teams-loop(@i - 1);
-      }
-      .teams-loop (@iterations);
     }
+    .title, .team {
+      transition-delay: 500ms !important;
+    }
+    @iterations: 5;
+    .teams-loop (@i) when (@i > 0) {
+      .team:nth-of-type(@{i}) {
+        transition-delay: (500ms - @i * 100ms) !important;
+      }
+      .teams-loop(@i - 1);
+    }
+    .teams-loop (@iterations);
   }
   .title {
     transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
