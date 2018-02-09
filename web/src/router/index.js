@@ -5,6 +5,7 @@ import Switcher from '@/components/control/Switcher';
 import Data from '@/components/control/Data';
 import Overlay from '@/components/Overlay';
 import Casters from '@/components/overlay/Casters';
+import Group from '@/components/overlay/Group';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
           path: 'casters',
           name: 'Casters',
           component: Casters
+        },
+        {
+          path: 'group',
+          name: 'Group',
+          component: Group
         }
       ]
     }
