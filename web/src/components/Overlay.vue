@@ -7,10 +7,12 @@
     name: 'Overlay',
     data () {
       return {
-        overlays: {}
+        overlays: {},
+        info: null
       };
     },
     mounted: function () {
+      this.$socket.emit('getData');
       this.$socket.emit('overlayAvailable', {
         scene: this.$route.params.scene,
         overlay: this.$route.name
@@ -19,6 +21,9 @@
     sockets: {
       overlays: function (overlays) {
         this.overlays = overlays;
+      },
+      data: function (data) {
+        this.info = data;
       }
     },
     computed: {

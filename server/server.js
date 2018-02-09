@@ -248,8 +248,8 @@ function updateGroups () {
                 if(opponent.participant == null) {
                     continue;
                 }
-                let teamId = opponent.participant.id
-                let team = group.teams[teamId]
+                let teamId = opponent.participant.id;
+                let team = group.teams[teamId];
                 if(team == null) {
                     team = group.teams[teamId] = {
                         id: teamId,

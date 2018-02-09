@@ -4,25 +4,26 @@
       .caster-info-container
         img.caster-bottom(src="../../assets/overlay/caster-left-bottom.svg")
         .caster-info-wrapper
-          p.caster-info {{ data.casters.left.name }}
+          p.caster-info {{ $parent.info.casters.left.nick }}
       .caster-name-container
         img.caster-top(src="../../assets/overlay/caster-left-top.svg")
         .caster-name-wrapper
-          p.caster-name {{ data.casters.left.nick }}
+          p.caster-name {{ $parent.info.casters.left.name }}
     .caster.caster-right(v-bind:class="$parent.isVisible ? '' : 'out'")
       .caster-info-container
         img.caster-bottom(src="../../assets/overlay/caster-right-bottom.svg")
         .caster-info-wrapper
-          p.caster-info {{ data.casters.right.name }}
+          p.caster-info {{ $parent.info.casters.right.nick }}
       .caster-name-container
         img.caster-top(src="../../assets/overlay/caster-right-top.svg")
         .caster-name-wrapper
-          p.caster-name {{ data.casters.right.nick }}
+          p.caster-name {{ $parent.info.casters.right.name }}
 </template>
 
 <script>
   export default {
-    name: 'Casters'
+    name: 'Casters',
+    props: ['info']
   };
 </script>
 
