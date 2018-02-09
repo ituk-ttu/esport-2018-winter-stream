@@ -18,6 +18,15 @@ var overlays = {};
 var transitions = [];
 var programScene = null;
 var previewScene = null;
+
+var groups = null;
+
+const scoreByResult = {
+  1: 3,
+  2: 1,
+  3: 0
+}
+
 updateScenes();
 updateTeams();
 
@@ -120,6 +129,16 @@ io.on('connection', function (socket) {
         socket.emit('teams', teams);
     });
 
+    socket.on('getGroups', function () {
+        socket.emit('groups', groups);
+    });
+
+    socket.on('updateGroups', function () {
+        updateTeams();
+        socket.emit('groups', teams);
+    });
+
+
     socket.on('saveToFile', function () {
         fs.writeFileSync("config/data.json", JSON.stringify(data));
     });
@@ -180,6 +199,87 @@ function updateTeams() {
             }
         ).getBody());
 }
+
+
+function updateGroups () {
+
+    request.get('https://api.toornament.com/v1/tournaments/' + config.toornamentId + '/matches',
+        {
+            headers: {
+                'X-Api-Key': config.toornamentKey
+            },
+            json: true
+        },
+        (err, res, body) => {
+            if (err) {
+                return console.log(err);
+            }
+            let normalize2 = normalize(compute(body))
+            console.log(JSON.stringify(normalize2));
+
+            return normalize2;
+        });
+
+    function compute (matches) {
+        let groups = {};
+        for(let match of matches.filter(match => match.stage_number === 1)) {
+            let groupId = match.group_number;
+            let group = groups[groupId];
+            if(group == null) {
+                group = groups[groupId] = {
+                    id: groupId,
+                    finished: true,
+                    teams: {}
+                }
+            }
+            for(let opponent of match.opponents) {
+                let teamId = opponent.participant.id
+                let team = group.teams[teamId]
+                if(team == null) {
+                    team = group.teams[teamId] = {
+                        id: teamId,
+                        name: opponent.participant.name,
+                        score: 0
+                    };
+                }
+                if(opponent.result in scoreByResult) {
+                    team.score += scoreByResult[opponent.result];
+                }
+                if(match.status !== 'completed') {
+                    group.finished = false;
+                }
+            }
+        }
+        return groups;
+    }
+    function normalize(groups) {
+        let groupChars = '0ABCDEFGH';
+        return Object.values(groups).sort((a, b) => a.id - b.id).map(group => ({
+            name: 'Grupp ' + groupChars.charAt(group.id),
+            finished: group.finished,
+            teams: Object.values(group.teams).sort((a, b) => b.score - a.score).map(team => ({
+                name: team.name,
+                score: team.score
+            }))
+        })).map(group => {
+            let marked = 0;
+            let scoreRequired = null;
+            group.teams.forEach(team => {
+                if(marked < 2) {
+                    marked++;
+                    team.willAdvance = true;
+                    scoreRequired = team.score;
+                } else {
+                    team.willAdvance = team.score >= scoreRequired;
+                }
+            });
+            return group;
+        });
+    }
+}
+
+updateGroups();
+setInterval(updateGroups, 10 * 1000);
 
 function updateScenes() {
     request('http://' + config.vmixIp + ':8088/API/', function (error, response, body) {
