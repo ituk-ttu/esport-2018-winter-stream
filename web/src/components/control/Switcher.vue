@@ -2,6 +2,13 @@
   .container.switcher-container
     div.panel-wrapper
       .panel.panel-default.transition-panel
+        .panel-heading.text-center Active group
+        .panel-body
+          .text-center
+            button.btn.btn-lg(v-for="group in view.groups"  v-on:click="setActiveGroup(group)"
+                              v-bind:class="group.id === view.activeGroup ? 'btn-success' : 'btn-info'")
+              | {{ group.name }}
+      .panel.panel-default.transition-panel
         .panel-heading.text-center Transition
         .panel-body
           .text-center
@@ -34,7 +41,9 @@
           preview: null,
           scenes: [],
           transitions: [],
-          overlays: {}
+          overlays: {},
+          groups: [],
+          activeGroup: null
         }
       };
     },
@@ -51,11 +60,22 @@
       overlays: function (overlays) {
         this.view.overlays = overlays;
         this.$forceUpdate();
+      },
+      groups: function (groups) {
+        this.view.groups = groups;
+        this.$forceUpdate();
+      },
+      activeGroup: function (activeGroup) {
+        this.view.activeGroup = activeGroup;
+        this.$forceUpdate();
       }
     },
     methods: {
       setPreview: function (scene) {
         this.$socket.emit('setPreview', scene.number);
+      },
+      setActiveGroup: function (group) {
+        this.$socket.emit('setActiveGroup', group.id);
       },
       getSceneButtonClass: function (scene) {
         if (scene.number === this.view.program) {

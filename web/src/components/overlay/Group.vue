@@ -1,6 +1,6 @@
 <template lang="pug">
   div.group(v-bind:class="$parent.isVisible ? '' : 'out'")
-    h1.title: span Grupp A
+    h1.title: span {{ data.group.name }}
     div.team
       div.name: span Tiim X
       div.score: span 12

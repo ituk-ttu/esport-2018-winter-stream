@@ -20,6 +20,9 @@ var programScene = null;
 var previewScene = null;
 
 var groups = null;
+var activeGroup = 1;
+
+var emitGroups = [];
 
 const scoreByResult = {
     1: 3,
@@ -37,7 +40,6 @@ io.on('connection', function (socket) {
     socket.authed = false;
     // FIXME
     socket.authed = true;
-
 
     socket.isOverlay = false;
     console.log(clk.green.underline.bold(socket.handshake.address) + clk.green(" has connected"));
@@ -89,7 +91,9 @@ io.on('connection', function (socket) {
             preview: previewScene,
             scenes: scenes,
             transitions: transitions,
-            overlays: overlays
+            overlays: overlays,
+            groups: groups,
+            activeGroup: activeGroup
         });
     });
 
@@ -131,13 +135,19 @@ io.on('connection', function (socket) {
 
     socket.on('getGroups', function () {
         socket.emit('groups', groups);
+        socket.emit('activeGroup', activeGroup);
     });
 
     socket.on('updateGroups', function () {
-        updateTeams();
-        socket.emit('groups', teams);
+        updateGroups();
     });
 
+    socket.on('setActiveGroup', function (newActiveGroup) {
+        activeGroup = newActiveGroup;
+        socket.emit('activeGroup', activeGroup);
+    });
+
+    emitGroups.push(() => socket.emit('groups', groups));
 
     socket.on('saveToFile', function () {
         fs.writeFileSync("config/data.json", JSON.stringify(data));
@@ -203,7 +213,7 @@ function updateTeams() {
 
 function updateGroups () {
 
-    request.get('https://api.toornament.com/v1/tournaments/' + config.toornamentId + '/matches',
+    return request.get('https://api.toornament.com/v1/tournaments/' + config.toornamentId + '/matches',
         {
             headers: {
                 'X-Api-Key': config.toornamentKey
@@ -214,7 +224,12 @@ function updateGroups () {
             if (err) {
                 return console.log(err);
             }
-            return normalize(compute(body));
+            groups = normalize(compute(body));
+            for(let emit of emitGroups) {
+                try {
+                    emit();
+                } catch (e) {}
+            }
         });
 
     function compute (matches) {
@@ -255,6 +270,7 @@ function updateGroups () {
     function normalize(groups) {
         let groupChars = '0ABCDEFGH';
         return Object.values(groups).sort((a, b) => a.id - b.id).map(group => ({
+            id: group.id,
             name: 'Grupp ' + groupChars.charAt(group.id),
             finished: group.finished,
             teams: Object.values(group.teams).sort((a, b) => b.score - a.score).map(team => ({
