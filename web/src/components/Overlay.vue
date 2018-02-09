@@ -8,11 +8,14 @@
     data () {
       return {
         overlays: {},
-        info: null
+        info: null,
+        groups: [],
+        activeGroup: 0
       };
     },
     mounted: function () {
       this.$socket.emit('getData');
+      this.$socket.emit('getGroups');
       this.$socket.emit('overlayAvailable', {
         scene: this.$route.params.scene,
         overlay: this.$route.name
@@ -24,6 +27,13 @@
       },
       data: function (data) {
         this.info = data;
+      },
+      groups: function (groups) {
+        this.groups = groups;
+      },
+      activeGroup: function (activeGroup) {
+        console.log(activeGroup)
+        this.activeGroup = activeGroup;
       }
     },
     computed: {

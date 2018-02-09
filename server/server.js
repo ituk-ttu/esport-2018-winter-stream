@@ -20,9 +20,7 @@ var programScene = null;
 var previewScene = null;
 
 var groups = null;
-var activeGroup = 1;
-
-var emitGroups = [];
+var activeGroup = 0;
 
 const scoreByResult = {
     1: 3,
@@ -130,7 +128,7 @@ io.on('connection', function (socket) {
 
     socket.on('updateTeams', function () {
         updateTeams();
-        socket.emit('teams', teams);
+        io.emit('teams', teams);
     });
 
     socket.on('getGroups', function () {
@@ -144,10 +142,8 @@ io.on('connection', function (socket) {
 
     socket.on('setActiveGroup', function (newActiveGroup) {
         activeGroup = newActiveGroup;
-        socket.emit('activeGroup', activeGroup);
+        io.emit('activeGroup', activeGroup);
     });
-
-    emitGroups.push(() => socket.emit('groups', groups));
 
     socket.on('saveToFile', function () {
         fs.writeFileSync("config/data.json", JSON.stringify(data));
@@ -225,11 +221,7 @@ function updateGroups () {
                 return console.log(err);
             }
             groups = normalize(compute(body));
-            for(let emit of emitGroups) {
-                try {
-                    emit();
-                } catch (e) {}
-            }
+            io.emit(groups);
         });
 
     function compute (matches) {

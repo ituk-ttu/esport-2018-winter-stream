@@ -1,18 +1,11 @@
 <template lang="pug">
-  div.group(v-bind:class="$parent.isVisible ? '' : 'out'")
-    h1.title: span {{ data.group.name }}
-    div.team
-      div.name: span Tiim X
-      div.score: span 12
-    div.team
-      div.name: span Boom eSports
-      div.score: span 9
-    div.team.looser
-      div.name: span Võib-olla
-      div.score: span 6
-    div.team.looser
-      div.name: span Grupist koitsa
-      div.score: span 0
+  div.groups
+    div.group(v-for="group in $parent.groups"
+              v-bind:class="$parent.isVisible && $parent.activeGroup === group.id ? '' : 'out'")
+      h1.title: span {{ group.name }}
+      div.team(v-for="team in group.teams" v-bind:class="!team.willAdvance && group.finished ? 'loser' : ''")
+        div.name: span {{ team.name }}
+        div.score: span {{ team.score }}
 
 </template>
 
@@ -23,12 +16,21 @@
 </script>
 
 <style lang="less" scoped>
+  .groups {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
   .group {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
     font-family: 'Lato', sans-serif;
     font-style: italic;
     text-transform: uppercase;
@@ -87,7 +89,7 @@
         -webkit-text-fill-color: transparent;
       }
     }
-    &.looser .name {
+    &.loser .name {
       background-image: url('../../assets/overlay/groups/team-black.svg');
     }
     .score {

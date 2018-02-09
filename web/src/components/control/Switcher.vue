@@ -5,7 +5,10 @@
         .panel-heading.text-center Active group
         .panel-body
           .text-center
-            button.btn.btn-lg(v-for="group in view.groups"  v-on:click="setActiveGroup(group)"
+            button.btn.btn-lg(v-on:click="setActiveGroup(0)"
+                              v-bind:class="view.activeGroup === 0? 'btn-danger' : 'btn-info'")
+              | Gruppi ei kuvata
+            button.btn.btn-lg(v-for="group in view.groups"  v-on:click="setActiveGroup(group.id)"
                               v-bind:class="group.id === view.activeGroup ? 'btn-success' : 'btn-info'")
               | {{ group.name }}
       .panel.panel-default.transition-panel
@@ -74,8 +77,8 @@
       setPreview: function (scene) {
         this.$socket.emit('setPreview', scene.number);
       },
-      setActiveGroup: function (group) {
-        this.$socket.emit('setActiveGroup', group.id);
+      setActiveGroup: function (groupId) {
+        this.$socket.emit('setActiveGroup', groupId);
       },
       getSceneButtonClass: function (scene) {
         if (scene.number === this.view.program) {
