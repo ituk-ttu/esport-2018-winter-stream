@@ -42,10 +42,10 @@
     },
     methods: {
       saveData: function (scene) {
-        this.$socket.emit('setData', data);
+        this.$socket.emit('setData', this.data);
       },
       reset: function () {
-        this.$socket.emit('getData', data);
+        this.$socket.emit('getData');
       }
     }
   };
