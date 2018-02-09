@@ -6,6 +6,7 @@ import Data from '@/components/control/Data';
 import Overlay from '@/components/Overlay';
 import Casters from '@/components/overlay/Casters';
 import Group from '@/components/overlay/Group';
+import StartingSoon from '@/components/overlay/StartingSoon';
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
           path: 'group',
           name: 'Group',
           component: Group
+        },
+        {
+          path: 'startingSoon',
+          name: 'StartingSoon',
+          component: StartingSoon
         }
       ]
     }
