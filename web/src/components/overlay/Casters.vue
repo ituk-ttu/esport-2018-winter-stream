@@ -4,20 +4,20 @@
       .caster-info-container
         img.caster-bottom(src="../../assets/overlay/caster-left-bottom.svg")
         .caster-info-wrapper
-          p.caster-info boom esports
+          p.caster-info {{ data.casters.left.name }}
       .caster-name-container
         img.caster-top(src="../../assets/overlay/caster-left-top.svg")
         .caster-name-wrapper
-          p.caster-name chuck Norris
+          p.caster-name {{ data.casters.left.nick }}
     .caster.caster-right(v-bind:class="$parent.isVisible ? '' : 'out'")
       .caster-info-container
         img.caster-bottom(src="../../assets/overlay/caster-right-bottom.svg")
         .caster-info-wrapper
-          p.caster-info boom esports
+          p.caster-info {{ data.casters.right.name }}
       .caster-name-container
         img.caster-top(src="../../assets/overlay/caster-right-top.svg")
         .caster-name-wrapper
-          p.caster-name chuck Norris
+          p.caster-name {{ data.casters.right.nick }}
 </template>
 
 <script>

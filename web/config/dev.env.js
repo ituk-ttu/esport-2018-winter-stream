@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env');
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  SOCKET_SERVER: '"http://192.168.0.109:3090"'
+  SOCKET_SERVER: '"http://10.0.25.246:3090"'
 });

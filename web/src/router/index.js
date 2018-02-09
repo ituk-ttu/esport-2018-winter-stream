@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Control from '@/components/Control';
 import Switcher from '@/components/control/Switcher';
+import Data from '@/components/control/Data';
 import Overlay from '@/components/Overlay';
 import Casters from '@/components/overlay/Casters';
 
@@ -17,6 +18,11 @@ export default new Router({
           path: 'switcher',
           name: 'Switcher',
           component: Switcher
+        },
+        {
+          path: 'data',
+          name: 'Data',
+          component: Data
         }
       ]
     },

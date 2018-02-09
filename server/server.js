@@ -22,10 +22,10 @@ var previewScene = null;
 var groups = null;
 
 const scoreByResult = {
-  1: 3,
-  2: 1,
-  3: 0
-}
+    1: 3,
+    2: 1,
+    3: 0
+};
 
 updateScenes();
 updateTeams();
