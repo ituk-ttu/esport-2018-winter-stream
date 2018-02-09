@@ -230,6 +230,9 @@ function updateGroups () {
                 }
             }
             for(let opponent of match.opponents) {
+                if(opponent.participant == null) {
+                    continue;
+                }
                 let teamId = opponent.participant.id
                 let team = group.teams[teamId]
                 if(team == null) {
