@@ -62,4 +62,106 @@
   body {
     overflow: hidden;
   }
+  .logo-arvutitark {
+    background-image: url('../assets/overlay/logos/arvutitark.svg');
+  }
+  .logo-msi-gaming {
+    background-image: url('../assets/overlay/logos/msi-gaming.png');
+  }
+  .logo-itt {
+    background-image: url('../assets/overlay/logos/ttu-it-teaduskond.png');
+  }
+  .logo-ituk {
+    background-image: url('../assets/overlay/logos/ituk.svg');
+  }
+  .logo-noctua {
+    background-image: url('../assets/overlay/logos/noctua.jpg');
+  }
+  .logo-roccat {
+    background-image: url('../assets/overlay/logos/roccat.png');
+  }
+  .logo-balsnack {
+    background-image: url('../assets/overlay/logos/balsnack.svg');
+  }
+  .logo-wolt {
+    background-image: url('../assets/overlay/logos/u-wolt-m8.png');
+  }
+  .logo-boom {
+    background-image: url('../assets/overlay/logos/boommedia.png');
+  }
+  .logo-filmiklubi {
+    background-image: url('../assets/overlay/logos/filmiklubi.svg');
+  }
+  .logo-monster {
+    background-image: url('../assets/overlay/logos/monster.svg');
+  }
+  .logo-network-tomorrow {
+    background-image: url('../assets/overlay/logos/network-tomorrow.svg');
+  }
+  .logo-academic-hostel {
+    background-image: url('../assets/overlay/logos/academic-hostel.svg');
+  }
+  .logo-bytelife {
+    background-image: url('../assets/overlay/logos/bytelife.png');
+  }
+  .logo-exit-room {
+    background-image: url('../assets/overlay/logos/exit-room.png');
+  }
+  .logo-iveco {
+    background-image: url('../assets/overlay/logos/iveco.png');
+  }
+  .logo-ye {
+    background-image: url('../assets/overlay/logos/ye.png');
+  }
+  .logo-arvutitark {
+    background-image: url('../assets/overlay/logos/arvutitark.svg');
+  }
+  .logo-msi-gaming {
+    background-image: url('../assets/overlay/logos/msi-gaming.png');
+  }
+  .logo-itt {
+    background-image: url('../assets/overlay/logos/ttu-it-teaduskond.png');
+  }
+  .logo-ituk {
+    background-image: url('../assets/overlay/logos/ituk.svg');
+  }
+  .logo-noctua {
+    background-image: url('../assets/overlay/logos/noctua.jpg');
+  }
+  .logo-roccat {
+    background-image: url('../assets/overlay/logos/roccat.png');
+  }
+  .logo-balsnack {
+    background-image: url('../assets/overlay/logos/balsnack.svg');
+  }
+  .logo-wolt {
+    background-image: url('../assets/overlay/logos/u-wolt-m8.png');
+  }
+  .logo-boom {
+    background-image: url('../assets/overlay/logos/boommedia.png');
+  }
+  .logo-filmiklubi {
+    background-image: url('../assets/overlay/logos/filmiklubi.svg');
+  }
+  .logo-monster {
+    background-image: url('../assets/overlay/logos/monster.svg');
+  }
+  .logo-network-tomorrow {
+    background-image: url('../assets/overlay/logos/network-tomorrow.svg');
+  }
+  .logo-academic-hostel {
+    background-image: url('../assets/overlay/logos/academic-hostel.svg');
+  }
+  .logo-bytelife {
+    background-image: url('../assets/overlay/logos/bytelife.png');
+  }
+  .logo-exit-room {
+    background-image: url('../assets/overlay/logos/exit-room.png');
+  }
+  .logo-iveco {
+    background-image: url('../assets/overlay/logos/iveco.png');
+  }
+  .logo-ye {
+    background-image: url('../assets/overlay/logos/ye.png');
+  }
 </style>

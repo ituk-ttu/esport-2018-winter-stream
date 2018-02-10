@@ -11,6 +11,7 @@ import Playoffs from '@/components/overlay/Playoffs';
 import MapsBO1 from '@/components/overlay/MapsBO1';
 import MapsBO3 from '@/components/overlay/MapsBO3';
 import Teams from '@/components/overlay/Teams';
+import LogoCarousel from '@/components/overlay/LogoCarousel';
 
 Vue.use(Router);
 
@@ -70,6 +71,11 @@ export default new Router({
           path: 'teams',
           name: 'Teams',
           component: Teams
+        },
+        {
+          path: 'logoCarousel',
+          name: 'LogoCarousel',
+          component: LogoCarousel
         }
       ]
     }
