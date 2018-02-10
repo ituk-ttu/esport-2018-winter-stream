@@ -35,7 +35,7 @@
             6: 'BO1'
           },
           3: {
-            1: 'Superfinaal (BO5) '
+            1: 'Superfinaal (BO5)'
           }
         }
       }
@@ -45,7 +45,6 @@
         return match.teams.every(team => team.name != null);
       },
       getTitle: function(group, round) {
-        console.log(this.titles)
         let groupTitles = this.titles[group.id];
         if(groupTitles == null) {
           return null;
