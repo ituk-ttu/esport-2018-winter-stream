@@ -20,6 +20,26 @@
               label.control-label Info
               input.form-control(v-model="data.casters.right.nick")
     .row
+      .col-xs-12.col-sm-5
+        .panel.panel-default
+          .panel-heading Left Team
+          .panel-body
+            .form-group
+              select.form-control(v-model="data.teams.left")
+                option(v-bind:value="nullTeam") NULL
+                option(v-for="team in teams" v-bind:value="team") {{team.name}}
+      .col-xs-12.col-sm-2
+        button.btn.btn-primary.btn-block.btn-lg(v-on:click="swapTeams()") Swap
+        button.btn.btn-default.btn-block.btn-sm(v-on:click="updateTeams()") Update list
+      .col-xs-12.col-sm-5
+        .panel.panel-default
+          .panel-heading Right Team
+          .panel-body
+            .form-group
+              select.form-control(v-model="data.teams.right")
+                option(v-bind:value="nullTeam") NULL
+                option(v-for="team in teams" v-bind:value="team") {{team.name}}
+    .row
       .col-xs-12.col-sm-4
         .panel.panel-default
           .panel-heading Map 1
@@ -81,16 +101,27 @@
     name: 'Data',
     mounted: function () {
       this.$socket.emit('getData');
+      this.$socket.emit('getTeams');
     },
     data () {
       return {
         availableMaps: ['Cache', 'Cobblestone', 'Inferno', 'Mirage', 'Nuke', 'Overpass', 'Train'],
-        data: null
+        data: null,
+        teams: [],
+        nullTeam: {
+          "id": "???",
+          "name": "???",
+          "logo": null
+        }
       };
     },
     sockets: {
       data: function (data) {
         this.data = data;
+      },
+      teams: function (teams) {
+        this.teams = teams;
+        this.$forceUpdate();
       }
     },
     methods: {
@@ -99,6 +130,9 @@
       },
       reset: function () {
         this.$socket.emit('getData');
+      },
+      updateTeams: function() {
+        this.$socket.emit('getTeams');
       }
     }
   };
