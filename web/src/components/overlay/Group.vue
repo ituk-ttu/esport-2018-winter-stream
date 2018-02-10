@@ -65,6 +65,7 @@
     text-align: center;
     background-image: url('../../assets/overlay/groups/header.svg');
     span {
+      padding: 0 5px;
       background: -webkit-linear-gradient(45deg, #d7d7d7, #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -86,6 +87,7 @@
       text-align: center;
       background-image: url('../../assets/overlay/groups/team.svg');
       span {
+        padding: 0 5px;
         background: -webkit-linear-gradient(45deg, #d7d7d7, #fff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -103,6 +105,7 @@
       line-height: 45px;
       background: url('../../assets/overlay/groups/score.svg') no-repeat center;
       span {
+        padding: 0 5px;
         background: -webkit-linear-gradient(45deg, #333, #000);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;

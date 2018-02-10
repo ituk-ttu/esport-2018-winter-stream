@@ -10,12 +10,15 @@
         overlays: {},
         info: null,
         groups: [],
-        activeGroup: 0
+        activeGroup: 0,
+        playoffs: [],
+        activePlayoffGroup: 0
       };
     },
     mounted: function () {
       this.$socket.emit('getData');
       this.$socket.emit('getGroups');
+      this.$socket.emit('getPlayoffs');
       this.$socket.emit('overlayAvailable', {
         scene: this.$route.params.scene,
         overlay: this.$route.name
@@ -32,8 +35,13 @@
         this.groups = groups;
       },
       activeGroup: function (activeGroup) {
-        console.log(activeGroup);
         this.activeGroup = activeGroup;
+      },
+      playoffs: function (playoffs) {
+        this.playoffs = playoffs;
+      },
+      activePlayoffGroup: function (activePlayoffGroup) {
+        this.activePlayoffGroup = activePlayoffGroup;
       }
     },
     computed: {

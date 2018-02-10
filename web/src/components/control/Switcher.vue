@@ -2,14 +2,24 @@
   .container.switcher-container
     div.panel-wrapper
       .panel.panel-default.transition-panel
+        .panel-heading.text-center Active bracker
+        .panel-body
+          .text-center
+            button.btn.btn-lg(v-on:click="setActivePlayoffGroup(0)"
+            v-bind:class="view.activePlayoffGroup === 0? 'btn-danger' : 'btn-info'")
+              | Ei kuvata
+            button.btn.btn-lg(v-for="group in playoffGroups"  v-on:click="setActivePlayoffGroup(group.id)"
+            v-bind:class="group.id === view.activePlayoffGroup ? 'btn-success' : 'btn-info'")
+              | {{ group.name }}
+      .panel.panel-default.transition-panel
         .panel-heading.text-center Active group
         .panel-body
           .text-center
             button.btn.btn-lg(v-on:click="setActiveGroup(0)"
-                              v-bind:class="view.activeGroup === 0? 'btn-danger' : 'btn-info'")
+            v-bind:class="view.activeGroup === 0? 'btn-danger' : 'btn-info'")
               | Gruppi ei kuvata
             button.btn.btn-lg(v-for="group in view.groups"  v-on:click="setActiveGroup(group.id)"
-                              v-bind:class="group.id === view.activeGroup ? 'btn-success' : 'btn-info'")
+            v-bind:class="group.id === view.activeGroup ? 'btn-success' : 'btn-info'")
               | {{ group.name }}
       .panel.panel-default.transition-panel
         .panel-heading.text-center Transition
@@ -39,6 +49,11 @@
     },
     data () {
       return {
+        playoffGroups: [
+          { name: 'Upper bracket', id: 1},
+          { name: 'Lower bracket', id: 2},
+          { name: 'Superfinaal', id: 3}
+        ],
         view: {
           program: null,
           preview: null,
@@ -71,6 +86,10 @@
       activeGroup: function (activeGroup) {
         this.view.activeGroup = activeGroup;
         this.$forceUpdate();
+      },
+      activePlayoffGroup: function (activePlayoffGroup) {
+        this.view.activePlayoffGroup = activePlayoffGroup;
+        this.$forceUpdate();
       }
     },
     methods: {
@@ -79,6 +98,9 @@
       },
       setActiveGroup: function (groupId) {
         this.$socket.emit('setActiveGroup', groupId);
+      },
+      setActivePlayoffGroup: function (groupId) {
+        this.$socket.emit('setActivePlayoffGroup', groupId);
       },
       getSceneButtonClass: function (scene) {
         if (scene.number === this.view.program) {

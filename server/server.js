@@ -21,6 +21,8 @@ var previewScene = null;
 
 var groups = null;
 var activeGroup = 0;
+var playoffs = null;
+var activePlayoffGroup = 0;
 
 const scoreByResult = {
     1: 3,
@@ -91,7 +93,9 @@ io.on('connection', function (socket) {
             transitions: transitions,
             overlays: overlays,
             groups: groups,
-            activeGroup: activeGroup
+            activeGroup: activeGroup,
+            playoffs: playoffs,
+            activePlayoffGroup: activePlayoffGroup
         });
     });
 
@@ -136,13 +140,23 @@ io.on('connection', function (socket) {
         socket.emit('activeGroup', activeGroup);
     });
 
-    socket.on('updateGroups', function () {
-        updateGroups();
+    socket.on('getPlayoffs', function () {
+        socket.emit('playoffs', playoffs);
+        socket.emit('activePlayoffGroup', activePlayoffGroup);
+    });
+
+    socket.on('updateMatches', function () {
+        updateMatches();
     });
 
     socket.on('setActiveGroup', function (newActiveGroup) {
         activeGroup = newActiveGroup;
         io.emit('activeGroup', activeGroup);
+    });
+
+    socket.on('setActivePlayoffGroup', function (newActivePlayoffGroup) {
+        activePlayoffGroup = newActivePlayoffGroup;
+        io.emit('activePlayoffGroup', activePlayoffGroup);
     });
 
     socket.on('saveToFile', function () {
@@ -206,9 +220,7 @@ function updateTeams() {
         ).getBody());
 }
 
-
-function updateGroups () {
-
+function updateMatches () {
     return request.get('https://api.toornament.com/v1/tournaments/' + config.toornamentId + '/matches',
         {
             headers: {
@@ -220,10 +232,14 @@ function updateGroups () {
             if (err) {
                 return console.log(err);
             }
-            groups = normalize(compute(body));
-            io.emit(groups);
+            groups = getGroups(body);
+            io.emit('groups', groups);
+            playoffs = getPlayoffs(body);
+            io.emit('playoffs', playoffs);
         });
+}
 
+function getGroups (matches) {
     function compute (matches) {
         let groups = {};
         for(let match of matches.filter(match => match.stage_number === 1)) {
@@ -284,10 +300,72 @@ function updateGroups () {
             return group;
         });
     }
+    return normalize(compute(matches));
 }
 
-updateGroups();
-setInterval(updateGroups, 10 * 1000);
+function getPlayoffs(matches) {
+    function compute(matches) {
+        let groups = {};
+        for(let match of matches.filter(match => match.stage_number === 2)) {
+            let group = groups[match.group_number];
+            if(group == null) {
+                group = groups[match.group_number] = {
+                    id: match.group_number,
+                    rounds: {}
+                }
+            }
+            let round = group.rounds[match.round_number];
+            if(round == null) {
+                round = group.rounds[match.round_number] = {
+                    id: match.round_number,
+                    matches: {}
+                }
+            }
+            round.matches[match.number] = match;
+        }
+        return groups;
+    }
+    function normalize(groups) {
+        return Object.values(groups)
+            .sort((a, b) => a.id - b.id)
+            .map(group => ({
+                    id: group.id,
+                    rounds: Object.values(group.rounds)
+                                  .sort((a, b) => a.id - b.id)
+                                  .map(round => ({
+                                      id: round.id,
+                                      matches: Object.values(round.matches)
+                                                     .sort((a, b) => a.id - b.id)
+                                                     .map(match => ({
+                                                         finished: match.status === 'completed',
+                                                         teams: getTeams(match)
+                                                     }))
+                                  }))
+            }));
+
+    }
+    function getTeams(match) {
+        return fixScore(match.opponents.map(opponent => ({
+            name: opponent.participant != null ? opponent.participant.name : null,
+            isLoser: opponent.result === 3,
+            score: opponent.score != null ? opponent.score : 0
+        })));
+    }
+    function fixScore(teams) {
+        if(teams.some(team => team.score > 10)) {
+            let scoreTeams = teams.slice().sort((a, b) => a.score - b.id);
+            let i = 1;
+            for(let scoreTeam of scoreTeams) {
+                scoreTeam.score = Math.max(i--, 0);
+            }
+        }
+        return teams;
+    }
+    return normalize(compute(matches));
+}
+
+updateMatches();
+setInterval(updateMatches, 10 * 1000);
 
 function updateScenes() {
     request('http://' + config.vmixIp + ':8088/API/', function (error, response, body) {
