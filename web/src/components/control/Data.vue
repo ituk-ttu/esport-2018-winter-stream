@@ -1,6 +1,11 @@
 <template lang="pug">
   .container
     .panel.panel-default
+      .panel-heading Starting soon text
+      .panel-body
+        .form-group
+          input.form-control(v-model="data.startingSoon.text")
+    .panel.panel-default
       .panel-heading Casters
       .panel-body
         .row
@@ -138,6 +143,11 @@
       },
       updateTeams: function() {
         this.$socket.emit('getTeams');
+      },
+      swapTeams: function() {
+        let temp = this.data.teams.left;
+        this.data.teams.right = this.data.teams.left;
+        this.data.teams.left = temp;
       }
     }
   };
