@@ -1,6 +1,7 @@
 <template lang="pug">
   div.cont
     h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span Jätkame varsti!
+    h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span {{ $parent.info.startingSoon.text }}
 
 </template>
 
