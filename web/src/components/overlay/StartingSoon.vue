@@ -18,7 +18,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato Black', sans-serif;
     font-style: italic;
     text-transform: uppercase;
   }

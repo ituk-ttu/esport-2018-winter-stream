@@ -1,129 +1,91 @@
 <template lang="pug">
-  div
-    
+  .bo1-view.maps-view
+    .maps
+      .map(v-bind:class="$parent.isVisible ? '' : 'out'")
+        img.map-img(v-bind:src="'/static/maps/' + toLowerCase($parent.info.maps[0].map) + '.png'" v-bind:class="$parent.isVisible ? '' : 'out'")
+        .map-misc-container
+          img(src="../../assets/overlay/big-map-misc.svg")
+          p.map-name {{$parent.info.maps[0].map}}
+        .map-text-container
+          img(src="../../assets/overlay/big-map-name.svg")
+          p.map-name {{$parent.info.maps[0].text}}
 </template>
 
 <script>
   export default {
-    name: 'Casters'
+    name: 'MapsBO1',
+    methods: {
+      toLowerCase: function (text) {
+        return text.toLowerCase();
+      }
+    }
   };
 </script>
 
 <style lang="less" scoped>
   p {
-    font-family: 'Lato', sans-serif;
+    margin: 0;
+    font-family: 'Lato Black', sans-serif;
     font-style: italic;
     font-weight: 700;
     text-transform: uppercase;
   }
-  .caster {
-    display: block;
-    position: absolute;
-    top: 850px;
-    .caster-top {
-      position: absolute;
-      top: 0;
-      width: 690px;
-      height: 120px;
-    }
-    .caster-bottom {
-      position: absolute;
-      top: 110px;
-      width: 610px;
-      height: 60px;
-    }
-    .caster-name-wrapper {
-      position: absolute;
-      text-align: center;
-      top: 12px;
-      width: 610px;
-      font-size: 66px;
-      p {
-
-      }
-    }
-    .caster-info-wrapper {
-      position: absolute;
-      text-align: center;
-      top: 123px;
-      width: 610px;
-      font-size: 30px;
-    }
-    &.caster-left {
-      &.out {
-        .caster-name-container {
-          transform: translateX(-800px);
-          transition-delay: 100ms;
-        }
-        .caster-info-container {
-          transform: translateX(-800px);
-          transition-delay: 0ms;
-        }
-      }
-      .caster-name-container {
+  .maps-view {
+    height: 100%;
+    text-align: center;
+    width: 1920px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    .maps {
+      padding-top: 300px;
+      .map {
         transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
-      }
-      .caster-info-container {
-        transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
-        transition-delay: 100ms;
-      }
-      left: 0;
-      .caster-bottom, .caster-top {
-        left: 0;
-      }
-      .caster-name-wrapper {
-        left: 20px;
-        p {
-          background: -webkit-linear-gradient(45deg, #d7d7d7, #fff);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        width: 518px;
+        &.out {
+          transform: translateY(900px);
         }
-      }
-      .caster-info-wrapper {
-        left: 10px;
-        p {
-          background: -webkit-linear-gradient(45deg, #333, #000);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .map-img {
+          position: relative;
+          top: 0;
+          left: 0;
+          width: 512px;
+          height: 512px;
+          border: 3px solid white;
         }
-      }
-    }
-    &.caster-right {
-      &.out {
-        .caster-name-container {
-          transform: translateX(800px);
-          transition-delay: 100ms;
+        .map-misc-container {
+          position: relative;
+          top: 18px;
+          img {
+            width: 320px;
+            margin-right: auto;
+            margin-left: auto;
+          }
+          p {
+            position: relative;
+            top: -35px;
+            background: -webkit-linear-gradient(45deg, #333, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 23px;
+          }
         }
-        .caster-info-container {
-          transform: translateX(800px);
-          transition-delay: 0ms;
-        }
-      }
-      .caster-name-container {
-        transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
-      }
-      .caster-info-container {
-        transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
-        transition-delay: 100ms;
-      }
-      right: 0;
-      .caster-bottom, .caster-top {
-        right: 0;
-      }
-      .caster-name-wrapper {
-        right: 20px;
-        p {
-          background: -webkit-linear-gradient(135deg, #d7d7d7, #fff);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-      }
-      .caster-info-wrapper {
-        right: 10px;
-        p {
-          background: -webkit-linear-gradient(135deg, #333, #000);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .map-text-container {
+          position: relative;
+          top: -113px;
+          img {
+            width: 476px;
+            margin-right: auto;
+            margin-left: auto;
+          }
+          p {
+            position: relative;
+            top: -64px;
+            background: -webkit-linear-gradient(45deg, #d7d7d7, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 42px;
+          }
         }
       }
     }

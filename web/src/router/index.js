@@ -7,6 +7,7 @@ import Overlay from '@/components/Overlay';
 import Casters from '@/components/overlay/Casters';
 import Group from '@/components/overlay/Group';
 import StartingSoon from '@/components/overlay/StartingSoon';
+import MapsBO1 from '@/components/overlay/MapsBO1';
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
           path: 'startingSoon',
           name: 'StartingSoon',
           component: StartingSoon
+        },
+        {
+          path: 'mapsBO1',
+          name: 'MapsBO1',
+          component: MapsBO1
         }
       ]
     }

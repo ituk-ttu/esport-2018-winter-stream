@@ -31,7 +31,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato Black', sans-serif;
     font-style: italic;
     text-transform: uppercase;
     &.out {
@@ -56,7 +56,7 @@
     transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
     margin: 0 0 75px;
     font-size: 60px;
-    font-weight: 900;
+    font-weight: 700;
     width: 690px;
     height: 120px;
     padding: 20px;

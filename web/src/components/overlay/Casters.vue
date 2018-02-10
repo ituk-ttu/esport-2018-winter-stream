@@ -29,7 +29,7 @@
 
 <style lang="less" scoped>
   p {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato Black', sans-serif;
     font-style: italic;
     font-weight: 700;
     text-transform: uppercase;
