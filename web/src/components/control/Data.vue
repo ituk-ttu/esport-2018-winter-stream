@@ -19,6 +19,11 @@
             .form-group
               label.control-label Info
               input.form-control(v-model="data.casters.right.nick")
+    .panel.panel-default
+      .panel-heading Team text
+      .panel-body
+        .form-group
+          input.form-control(v-model="data.teams.text")
     .row
       .col-xs-12.col-sm-5
         .panel.panel-default
