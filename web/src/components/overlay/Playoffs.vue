@@ -45,8 +45,6 @@
         return match.teams.every(team => team.name != null);
       },
       getTitle: function (group, round) {
-        console.log(this.titles);
-      getTitle: function(group, round) {
         let groupTitles = this.titles[group.id];
         if (groupTitles == null) {
           return null;

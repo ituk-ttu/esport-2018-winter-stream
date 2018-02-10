@@ -144,7 +144,7 @@
       updateTeams: function () {
         this.$socket.emit('getTeams');
       },
-      swapTeams: function() {
+      swapTeams: function () {
         let temp = this.data.teams.left;
         this.data.teams.right = this.data.teams.left;
         this.data.teams.left = temp;
