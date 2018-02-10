@@ -1,8 +1,8 @@
 <template lang="pug">
   .groups
     .group(v-for="group in $parent.playoffs"
-           v-bind:class="[$parent.isVisible && $parent.activePlayoffGroup === group.id ? '' : 'out', " +
-                          "group.id === superFinalGroup ? 'superFinal' : '']")
+    v-bind:class="[$parent.isVisible && $parent.activePlayoffGroup === group.id ? '' : 'out', " +
+    "group.id === superFinalGroup ? 'superFinal' : '']")
       .round(v-for="round in group.rounds")
         .round-title(v-if="getTitle(group, round) != null") {{ getTitle(group, round) }}
         .round-body
@@ -35,19 +35,19 @@
             6: '(BO1)'
           },
           3: {
-            1: 'Superfinaal (BO5) '
+            1: 'Superfinaal (BO5)'
           }
         }
-      }
+      };
     },
     methods: {
-      showScores: function(match) {
+      showScores: function (match) {
         return match.teams.every(team => team.name != null);
       },
-      getTitle: function(group, round) {
-        console.log(this.titles)
+      getTitle: function (group, round) {
+        console.log(this.titles);
         let groupTitles = this.titles[group.id];
-        if(groupTitles == null) {
+        if (groupTitles == null) {
           return null;
         }
         return groupTitles[round.id];
@@ -62,6 +62,7 @@
     width: 100%;
     position: relative;
   }
+
   .group {
     position: absolute;
     top: 0;
@@ -96,13 +97,17 @@
       .round-in-loop(@i - 1);
     }
     .round-in-loop (@iterations);
-  } .round {
+  }
+
+  .round {
     transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
     display: flex;
     align-items: stretch;
     flex-direction: column;
     justify-content: space-around;
-  } .round-title {
+  }
+
+  .round-title {
     height: 45px;
     line-height: 45px;
     text-align: center;
@@ -115,18 +120,22 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-  } .round-body {
+  }
+
+  .round-body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex-grow: 1;
   }
+
   .team {
     text-align: center;
     margin: 5px 0;
     font-weight: 900;
     display: flex;
   }
+
   .name {
     height: 45px;
     line-height: 45px;
@@ -142,6 +151,7 @@
       }
     }
   }
+
   .score {
     height: 39px;
     line-height: 39px;
@@ -155,6 +165,7 @@
       -webkit-text-fill-color: transparent;
     }
   }
+
   .team.loser {
     .name {
       background-image: url('../../assets/overlay/brackets/regular_team_white.svg');
@@ -169,6 +180,7 @@
       background-image: url('../../assets/overlay/brackets/regular_score_black.svg');
     }
   }
+
   .superFinal {
     zoom: 300%;
     .round-title {

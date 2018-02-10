@@ -36,8 +36,8 @@
                 | {{ scene.title }}
               .overlays(v-if="sceneHasOverlays(scene)")
                 button.btn.btn-block(v-for="overlay in getSceneOverlays(scene)"
-                                     v-bind:class="overlay.visible ? 'btn-success' : 'btn-danger'"
-                                     v-on:click="setOverlayVisible(scene, overlay, !overlay.visible)")
+                v-bind:class="overlay.visible ? 'btn-success' : 'btn-danger'"
+                v-on:click="setOverlayVisible(scene, overlay, !overlay.visible)")
                   | {{ overlay.name }}
 </template>
 
@@ -50,9 +50,9 @@
     data () {
       return {
         playoffGroups: [
-          { name: 'Upper bracket', id: 1},
-          { name: 'Lower bracket', id: 2},
-          { name: 'Superfinaal', id: 3}
+          {name: 'Upper bracket', id: 1},
+          {name: 'Lower bracket', id: 2},
+          {name: 'Superfinaal', id: 3}
         ],
         view: {
           program: null,

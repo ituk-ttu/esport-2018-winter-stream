@@ -114,9 +114,9 @@
         data: null,
         teams: [],
         nullTeam: {
-          "id": "???",
-          "name": "???",
-          "logo": null
+          'id': '???',
+          'name': '???',
+          'logo': null
         }
       };
     },
@@ -136,7 +136,7 @@
       reset: function () {
         this.$socket.emit('getData');
       },
-      updateTeams: function() {
+      updateTeams: function () {
         this.$socket.emit('getTeams');
       }
     }

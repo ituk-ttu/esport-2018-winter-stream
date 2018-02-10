@@ -9,6 +9,7 @@ import Group from '@/components/overlay/Group';
 import StartingSoon from '@/components/overlay/StartingSoon';
 import Playoffs from '@/components/overlay/Playoffs';
 import MapsBO1 from '@/components/overlay/MapsBO1';
+import Teams from '@/components/overlay/Teams';
 
 Vue.use(Router);
 
@@ -58,6 +59,11 @@ export default new Router({
           path: 'playoffs',
           name: 'Playoffs',
           component: Playoffs
+        },
+        {
+          path: 'teams',
+          name: 'Teams',
+          component: Teams
         }
       ]
     }
