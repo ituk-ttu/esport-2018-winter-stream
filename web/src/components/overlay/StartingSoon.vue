@@ -1,8 +1,26 @@
 <template lang="pug">
-  div.cont
-    h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span Jätkame varsti!
-    h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span {{ $parent.info.startingSoon.text }}
-
+  div.cont(v-bind:class="$parent.isVisible ? '' : 'out'")
+    h1.title: span {{ $parent.info.startingSoon.text }}
+    div.sponsor-logos
+      .sponsors
+        .sponsor-logo.logo-arvutitark
+        .sponsor-logo.logo-msi-gaming
+        .sponsor-logo.logo-itt
+        .sponsor-logo.logo-ituk
+      .sponsors-sm
+        .sponsor-logo.logo-noctua
+        .sponsor-logo.logo-roccat
+        .sponsor-logo.logo-balsnack
+        .sponsor-logo.logo-wolt
+        .sponsor-logo.logo-boom
+        .sponsor-logo.logo-filmiklubi
+        .sponsor-logo.logo-monster
+        .sponsor-logo.logo-network-tomorrow
+        .sponsor-logo.logo-academic-hostel
+        .sponsor-logo.logo-bytelife
+        .sponsor-logo.logo-exit-room
+        .sponsor-logo.logo-iveco
+        .sponsor-logo.logo-ye
 </template>
 
 <script>
@@ -22,10 +40,17 @@
     font-family: 'Lato Black', sans-serif;
     font-style: italic;
     text-transform: uppercase;
+    &.out {
+      .title, .sponsors, .sponsors-sm {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+    }
   }
   .title {
     transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
-    margin: 0 0 75px;
+    transition-delay: 250ms;
+    margin: 80px 0;
     font-size: 60px;
     font-weight: 900;
     width: 690px;
@@ -40,9 +65,88 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    &.out {
-      transform: translateY(100px);
-      opacity: 0;
+  }
+  .sponsor-logos {
+    width: 70%;
+    margin: 0 15%;
+    .sponsors {
+      transition-delay: 100ms !important;
     }
+    .sponsors, .sponsors-sm {
+      transition: all 300ms cubic-bezier(0, 0.8, 1, 1);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+    }
+    .sponsors .sponsor-logo {
+      margin: 40px 0;
+      width: 25%;
+      height: 20vh;
+    }
+    .sponsors-sm .sponsor-logo {
+      width: 20%;
+      height: 10vh;
+    }
+  }
+  .sponsor-logo {
+    padding: 20px;
+    box-sizing: border-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-origin: content-box;
+  }
+  .logo-arvutitark {
+    background-image: url('../../assets/overlay/logos/arvutitark.svg');
+  }
+  .logo-msi-gaming {
+    background-image: url('../../assets/overlay/logos/msi-gaming.png');
+  }
+  .logo-itt {
+    background-image: url('../../assets/overlay/logos/itt.png');
+  }
+  .logo-ituk {
+    background-image: url('../../assets/overlay/logos/ituk.svg');
+  }
+  .logo-noctua {
+    background-image: url('../../assets/overlay/logos/noctua.jpg');
+  }
+  .logo-roccat {
+    background-image: url('../../assets/overlay/logos/roccat.jpg');
+  }
+  .logo-balsnack {
+    background-image: url('../../assets/overlay/logos/balsnack.svg');
+  }
+  .logo-wolt {
+    background-image: url('../../assets/overlay/logos/wolt.png');
+  }
+  .logo-boom {
+    background-image: url('../../assets/overlay/logos/boommedia.png');
+  }
+  .logo-filmiklubi {
+    background-image: url('../../assets/overlay/logos/filmiklubi.svg');
+  }
+  .logo-monster {
+    background-image: url('../../assets/overlay/logos/monster.svg');
+  }
+  .logo-network-tomorrow {
+    background-image: url('../../assets/overlay/logos/network-tomorrow.svg');
+  }
+  .logo-academic-hostel {
+    background-image: url('../../assets/overlay/logos/academic-hostel.svg');
+  }
+  .logo-bytelife {
+    background-image: url('../../assets/overlay/logos/bytelife.png');
+  }
+  .logo-exit-room {
+    background-image: url('../../assets/overlay/logos/exit-room.jpeg');
+  }
+  .logo-iveco {
+    background-image: url('../../assets/overlay/logos/iveco.jpg');
+  }
+  .logo-ye {
+    background-image: url('../../assets/overlay/logos/ye.jpg');
   }
 </style>
