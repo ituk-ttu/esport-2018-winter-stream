@@ -21,6 +21,7 @@
         .sponsor-logo.logo-exit-room
         .sponsor-logo.logo-iveco
         .sponsor-logo.logo-ye
+        .sponsor-logo.logo-xgr
 </template>
 
 <script>

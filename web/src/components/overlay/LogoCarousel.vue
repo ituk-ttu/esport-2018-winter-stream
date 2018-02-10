@@ -18,6 +18,7 @@
       .sponsor-logo.logo-exit-room
       .sponsor-logo.logo-iveco
       .sponsor-logo.logo-ye
+      .sponsor-logo.logo-xgr
 </template>
 
 <script>
@@ -49,7 +50,7 @@
     background-origin: content-box;
   }
   @logos: arvutitark, msi-gaming, itt, ituk, noctua, roccat, balsnack, wolt, boom, filmiklubi, monster,
-          network-tomorrow, academic-hostel, bytelife, exit-room, iveco, ye;
+          network-tomorrow, academic-hostel, bytelife, exit-room, iveco, ye, xgr;
   @still-duration: 1500;
   @fade-duration: 1500;
   @step-duration: (@still-duration + @fade-duration);

@@ -164,4 +164,7 @@
   .logo-ye {
     background-image: url('../assets/overlay/logos/ye.png');
   }
+  .logo-xgr {
+    background-image: url('../assets/overlay/logos/xgr.png');
+  }
 </style>
