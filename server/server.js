@@ -348,15 +348,14 @@ function getPlayoffs(matches) {
         return fixScore(match.opponents.map(opponent => ({
             name: opponent.participant != null ? opponent.participant.name : null,
             isLoser: opponent.result === 3,
-            score: opponent.score != null ? opponent.score : 0
+            score: opponent.score != null ? opponent.score : 0,
+            result: opponent.result
         })));
     }
     function fixScore(teams) {
         if(teams.some(team => team.score > 10)) {
-            let scoreTeams = teams.slice().sort((a, b) => a.score - b.id);
-            let i = 1;
-            for(let scoreTeam of scoreTeams) {
-                scoreTeam.score = Math.max(i--, 0);
+            for(let team of teams) {
+                team.score = team.result === 1 ? 1 : 0;
             }
         }
         return teams;

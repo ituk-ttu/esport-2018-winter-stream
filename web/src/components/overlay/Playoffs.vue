@@ -27,12 +27,12 @@
             4: 'finaal (BO3)'
           },
           2: {
-            1: '(BO1)',
-            2: '(BO1)',
-            3: '(BO1)',
-            4: '(BO1)',
-            5: '(BO1)',
-            6: '(BO1)'
+            1: 'BO1',
+            2: 'BO1',
+            3: 'BO1',
+            4: 'BO1',
+            5: 'BO1',
+            6: 'BO1'
           },
           3: {
             1: 'Superfinaal (BO5)'
@@ -46,6 +46,7 @@
       },
       getTitle: function (group, round) {
         console.log(this.titles);
+      getTitle: function(group, round) {
         let groupTitles = this.titles[group.id];
         if (groupTitles == null) {
           return null;
