@@ -32,7 +32,7 @@
         this.groups = groups;
       },
       activeGroup: function (activeGroup) {
-        console.log(activeGroup)
+        console.log(activeGroup);
         this.activeGroup = activeGroup;
       }
     },

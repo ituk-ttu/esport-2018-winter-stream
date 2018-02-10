@@ -1,6 +1,6 @@
 <template lang="pug">
   div.cont
-    h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span Jätkame peatselt!
+    h1.title(v-bind:class="$parent.isVisible ? '' : 'out'"): span Jätkame homme!
 
 </template>
 
