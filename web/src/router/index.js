@@ -10,6 +10,7 @@ import StartingSoon from '@/components/overlay/StartingSoon';
 import Playoffs from '@/components/overlay/Playoffs';
 import MapsBO1 from '@/components/overlay/MapsBO1';
 import MapsBO3 from '@/components/overlay/MapsBO3';
+import MapsBO5 from '@/components/overlay/MapsBO5';
 import Teams from '@/components/overlay/Teams';
 import LogoCarousel from '@/components/overlay/LogoCarousel';
 
@@ -61,6 +62,11 @@ export default new Router({
           path: 'mapsBO3',
           name: 'MapsBO3',
           component: MapsBO3
+        },
+        {
+          path: 'mapsBO5',
+          name: 'MapsBO5',
+          component: MapsBO5
         },
         {
           path: 'playoffs',
